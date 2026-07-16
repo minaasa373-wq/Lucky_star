@@ -1,0 +1,659 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>らき☆すたと学ぶ動画編集｜Day8前半</title>
+<style>
+:root{
+  --bg1:#f8fbff;--bg2:#eef3ff;--line:#d7def3;--ink:#25314d;--muted:#64708d;
+  --blue:#6e8cff;--pink:#ffb6d9;--shadow:0 12px 32px rgba(76,102,170,.15);
+  --sans:system-ui,-apple-system,"Hiragino Sans","Yu Gothic","Meiryo",sans-serif
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;color:var(--ink);font-family:var(--sans);
+  background:
+    radial-gradient(circle at 15% 10%,rgba(255,182,217,.28),transparent 18%),
+    radial-gradient(circle at 90% 8%,rgba(110,140,255,.20),transparent 20%),
+    linear-gradient(180deg,var(--bg1),var(--bg2));
+  min-height:100vh
+}
+body:before{
+  content:"";position:fixed;inset:0;pointer-events:none;opacity:.25;
+  background-image:
+    radial-gradient(circle at 20px 20px,rgba(255,182,217,.9) 0 3px,transparent 3px),
+    radial-gradient(circle at 70px 60px,rgba(110,140,255,.9) 0 3px,transparent 3px);
+  background-size:150px 120px
+}
+.top{position:sticky;top:0;z-index:5;background:#ffffffc9;backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.topin{width:min(1440px,calc(100% - 24px));margin:auto;padding:10px;display:flex;justify-content:space-between;gap:12px;align-items:center}
+.logo{display:flex;gap:12px;align-items:center}
+.logoimg{
+  width:54px;height:54px;border-radius:18px;background:linear-gradient(135deg,var(--blue),var(--pink));
+  display:grid;place-items:center;overflow:hidden;border:1px solid #fff;box-shadow:var(--shadow)
+}
+.logoimg img{width:100%;height:100%;object-fit:cover}
+.logoimg .fallback{font-weight:900;color:#fff;font-size:22px}
+.titleWrap{display:flex;flex-direction:column;gap:2px;align-items:center;justify-content:center;text-align:center;flex:1}
+.titleWrap b{font-size:20px}
+.titleWrap span,.tags span{font-size:12px;color:var(--muted)}
+.tags{display:flex;gap:8px;flex-wrap:wrap}
+.tags span{background:white;border:1px solid var(--line);padding:7px 10px;border-radius:999px}
+.layout{width:min(1440px,calc(100% - 24px));margin:14px auto 30px;display:grid;grid-template-columns:290px minmax(0,1fr) 290px;gap:16px;position:relative;z-index:1}
+.side,.cast{
+  position:sticky;top:78px;max-height:calc(100vh - 96px);overflow:auto;border:1px solid var(--line);
+  border-radius:28px;background:#ffffffb8;backdrop-filter:blur(14px);box-shadow:var(--shadow);padding:14px
+}
+.main{border:1px solid var(--line);border-radius:32px;background:#ffffffcc;box-shadow:var(--shadow);overflow:hidden}
+.bar{height:24px;background:linear-gradient(90deg,#ffbfdc,#ffeaa7,#bfe7ff,#d7ccff,#c7f1df)}
+.inner{padding:20px clamp(14px,2vw,28px) 28px}
+.hero{
+  position:relative;overflow:hidden;border:1px solid var(--line);border-radius:28px;padding:18px;
+  background:linear-gradient(135deg,#fff,#fff8fc);box-shadow:0 12px 28px rgba(76,102,170,.10);margin-bottom:20px
+}
+.eyebrow{display:inline-flex;padding:6px 11px;border-radius:999px;font-size:12px;font-weight:900;color:#4c4f7d;background:#fff;border:1px solid var(--line)}
+h1{font-size:clamp(28px,3vw,42px);line-height:1.28;margin:12px 0 10px}
+h2{font-size:clamp(24px,2.3vw,36px);line-height:1.36;margin:0 0 10px}
+h3{margin:0 0 8px}
+.lead,.sectionLead{color:var(--muted);line-height:1.9}
+.pillrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.pill{background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 11px;font-size:12px}
+.section{margin-top:20px;padding-top:20px;border-top:1px solid #e9effd;scroll-margin-top:90px}
+.panel,.card,.diagram{border:1px solid var(--line);background:white;border-radius:24px;padding:16px;box-shadow:0 10px 24px rgba(76,102,170,.08)}
+.label{display:inline-flex;border-radius:999px;background:#fff7cc;color:#816100;border:1px solid #f4dea4;padding:7px 11px;font-size:12px;font-weight:900;margin-bottom:12px}
+.dialogue{display:grid;gap:14px}
+.line{display:grid;grid-template-columns:66px 1fr;gap:12px}
+.line.right{grid-template-columns:1fr 66px}
+.line.right .bubble{grid-column:1;grid-row:1}
+.line.right .avatar{grid-column:2}
+.avatar{
+  width:66px;height:66px;border-radius:22px;background:linear-gradient(135deg,#91b2ff,#ffd8ea);
+  border:2px solid white;box-shadow:0 8px 20px rgba(76,102,170,.16);overflow:hidden;display:grid;place-items:center
+}
+.avatar img{width:100%;height:100%;object-fit:cover}
+.fallback{color:white;font-size:20px;font-weight:900}
+.bubble{border:1px solid var(--line);background:#fff;border-radius:20px;padding:12px 14px;box-shadow:0 8px 20px rgba(76,102,170,.07)}
+.speaker{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:6px}
+.role{padding:4px 8px;border-radius:999px;font-size:11px;font-weight:900;color:white;background:linear-gradient(135deg,var(--blue),#7d66ff)}
+.bubble p,.card p,.card li{margin:0;line-height:1.9;color:#3f4b65}
+.term{color:#2e5cff;font-weight:900;text-decoration:underline dotted}
+.simple{display:block;margin-top:6px;color:#6c5f00;background:#fff8d7;border:1px dashed #f0dc8d;border-radius:14px;padding:8px 10px;font-size:13px;line-height:1.8}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:16px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:16px}
+.card b{display:block;margin-bottom:8px}
+.card ul{margin:0;padding-left:1.15em}
+.warn{margin-top:14px;border:1px solid #ffd2e3;border-radius:20px;background:#fff7fb;padding:14px;line-height:1.9}
+.sidehero,.tocTitle,.castCard,.note,.glossary,.glossary details{
+  border:1px solid var(--line);border-radius:22px;background:#fff;padding:14px
+}
+.sidehero p,.note,.castText span{color:var(--muted);line-height:1.8}
+.tocTitle{display:flex;justify-content:space-between;align-items:center;margin-top:12px;margin-bottom:12px}
+.acc{margin-bottom:10px;border:1px solid var(--line);border-radius:18px;background:#fff;overflow:hidden}
+.acc summary{list-style:none;cursor:pointer;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;font-weight:900}
+.acc summary::-webkit-details-marker{display:none}
+.chev{width:12px;height:12px;border-right:2px solid #7885a6;border-bottom:2px solid #7885a6;transform:rotate(45deg);transition:.2s}
+.acc[open] .chev{transform:rotate(-135deg)}
+.links{display:grid;gap:8px;padding:0 14px 14px}
+.links a{text-decoration:none;color:#40538b;border:1px solid var(--line);border-radius:999px;padding:8px 11px;background:#f8fbff}
+.cast{display:grid;gap:12px}
+.castCard{display:grid;grid-template-columns:66px 1fr;gap:12px;align-items:center}
+.castText b{display:block;margin-bottom:4px}
+.diagram img{width:100%;height:auto;display:block;border-radius:18px;border:1px solid var(--line);cursor:zoom-in}
+.diagram .cap{margin-top:10px;color:var(--muted);line-height:1.8}
+.diagram::after{
+  content:"🔍 画像クリックで拡大";
+  display:inline-flex;margin:10px 0 0;padding:6px 10px;border-radius:999px;background:#fff;
+  border:1px solid var(--line);color:#4b5b82;font-size:12px;font-weight:900
+}
+.glossary{margin-top:26px;display:grid;gap:10px}
+.glossary details summary{list-style:none;cursor:pointer;padding:0;display:flex;justify-content:space-between;align-items:center;font-weight:900}
+.glossary details summary::-webkit-details-marker{display:none}
+.glossaryContent{margin-top:10px;color:#46526e;line-height:1.9}
+.filebox{margin-top:16px;padding:14px;border:1px dashed #c7d2f6;border-radius:18px;background:#f9fbff;line-height:1.9}
+.zoomOverlay{
+  position:fixed;inset:0;z-index:999999;display:none;align-items:center;justify-content:center;padding:22px;
+  background:rgba(20,30,52,.78);backdrop-filter:blur(10px)
+}
+.zoomOverlay.open{display:flex}
+.zoomBox{width:min(1700px,96vw);max-height:94vh;overflow:auto;border-radius:26px;background:#fff;box-shadow:0 26px 90px rgba(0,0,0,.42);border:1px solid rgba(255,255,255,.9);padding:14px}
+.zoomHead{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:4px 4px 12px}
+.zoomHead b{color:#25314d;font-size:15px}
+.zoomClose{border:1px solid var(--line);background:#f5f7ff;color:#25314d;border-radius:999px;padding:8px 12px;font-weight:900;cursor:pointer;font:inherit}
+#zoomBigImg{display:block;width:auto;max-width:none;height:auto;min-width:min(1200px,calc(96vw - 64px));border-radius:18px;border:1px solid var(--line)}
+@media(max-width:1200px){.layout{grid-template-columns:290px 1fr}.cast{display:none}}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.side{position:relative;top:auto;max-height:none}.grid2,.grid3{grid-template-columns:1fr}}
+@media(max-width:640px){
+  .topin{flex-direction:column;align-items:flex-start}
+  .line,.line.right{grid-template-columns:56px 1fr}
+  .line.right .avatar{grid-column:1}
+  .line.right .bubble{grid-column:2}
+  .avatar{width:56px;height:56px;border-radius:18px}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="topin">
+    <div class="logo">
+      <div class="logoimg">
+        <img src="./rakisuta_logo.png" alt="らき☆すたロゴ" onerror="this.remove();this.parentNode.innerHTML='<span class=fallback>ら</span>'">
+      </div>
+    </div>
+    <div class="titleWrap">
+      <b>らき☆すたと学ぶ動画編集</b>
+      <span>Day8｜AI動画生成の最新地図と精度アップ実践</span>
+    </div>
+    <div class="tags">
+      <span>AI動画生成</span><span>Seedance</span><span>Veo</span><span>Kling</span><span>安全運用</span><span>精度アップ</span><span>プロンプト実践</span>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+  <aside class="side">
+    <div class="sidehero">
+      <h3>Day8</h3>
+      <p>テーマは「AI動画生成の最新状況」と「事故らない使い方」。超初心者でも、何を選び、どう作り、どこを気をつけるかが分かるように整理してある。</p>
+    </div>
+    <div class="tocTitle"><span>目次</span><span>閉じた状態</span></div>
+
+    <details class="acc">
+      <summary><span>Day8前半｜AI動画生成の最新地図</span><i class="chev"></i></summary>
+      <div class="links">
+        <a href="#hero">トップ</a>
+        <a href="#s1">いま何が起きてる？</a>
+        <a href="#s2">モデルの使い分け</a>
+        <a href="#s3">HeyGenとAdobe</a>
+        <a href="#s4">7つの罠</a>
+        <a href="#s5">AIラベルと法律</a>
+        <a href="#s6">新時代の対応法</a>
+        <a href="#s7">図解ワークフロー</a>
+      </div>
+    </details>
+
+
+    <details class="acc">
+      <summary><span>Day8後半｜AI動画モデル実戦・精度アップ</span><i class="chev"></i></summary>
+      <div class="links">
+        <a href="#backhero">トップ</a>
+        <a href="#b1">実生成ランキング</a>
+        <a href="#b2">精度を上げるプロンプト</a>
+        <a href="#b3">動きとカメラ制御</a>
+        <a href="#b4">リファレンスとリップシンク</a>
+        <a href="#b5">長尺化と確認</a>
+        <a href="#b6">図解まとめ</a>
+      </div>
+    </details>
+
+    <details class="acc">
+      <summary><span>用語辞典</span><i class="chev"></i></summary>
+      <div class="links">
+        <a href="#gl-multimodal">マルチモーダル</a>
+        <a href="#gl-api">API</a>
+        <a href="#gl-physical">物理表現</a>
+        <a href="#gl-ai-label">AIラベル</a>
+        <a href="#gl-credit">クレジット</a>
+        <a href="#gl-avatar">アバター</a>
+        <a href="#gl-rights">著作権・肖像権</a>
+      </div>
+    </details>
+
+    <div class="filebox">
+      <b>同じフォルダに入れる画像</b><br>
+      tsukasa.png / konata.png / kagami.png / miyuki.png / rakisuta_logo.png<br>
+      day8_model_choice_map.png / day8_safe_workflow.png / day8_trap_counter_map.png / day8_rule_ethics_map.png<br>day8_back_model_ranking_map.png / day8_back_prompt_precision_workflow.png / day8_back_motion_camera_map.png / day8_back_reference_lipsync_extend_flow.png
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="bar"></div>
+    <div class="inner">
+
+      <section class="hero" id="hero">
+        <span class="eyebrow">DAY8 FRONT / AI VIDEO GENERATION 2026</span>
+        <h1>AI動画生成は、<br>「すごい映像を作る競争」から<br>「安全に運用できる人が勝つ時代」へ。</h1>
+        <p class="lead">
+          Day8前半では、Veo 3.1、Kling 3.0、Seedance 2.0などの最新モデルを、
+          「どれが最強か」ではなく「何に向いているか」で整理する。
+          さらに、HeyGenのアバター、Adobe Fireflyの外部AI統合、YouTubeのAIラベル、
+          実在人物を使った危険なAI加工の法律リスクまで含めて、
+          技術・運用・倫理をまとめて学ぶ。
+        </p>
+        <div class="pillrow">
+          <span class="pill">🎬 最新モデル比較</span>
+          <span class="pill">⚠️ 7つの罠</span>
+          <span class="pill">🏷️ AIラベル</span>
+          <span class="pill">⚖️ 法律と権利</span>
+          <span class="pill">🚀 新時代の対応法</span>
+        </div>
+      </section>
+
+      <section class="section" id="s1">
+        <h2>1. いま何が起きてる？</h2>
+        <p class="sectionLead">AI動画生成は、数ヶ月単位で主役が入れ替わる超高速の進化期に入っている。大事なのは、ランキングを見ることより、「何を作るか」に応じて使い分けること。</p>
+
+        <div class="panel">
+          <div class="label">SCENE 22 / まずは全体像</div>
+          <div class="dialogue">
+            <div class="line">
+              <div class="avatar"><img src="./tsukasa.png" alt="柊つかさ" onerror="this.remove();this.parentNode.innerHTML='<span class=fallback>つ</span>'"></div>
+              <div class="bubble">
+                <div class="speaker"><b>柊つかさ</b><span class="role">素朴な疑問役</span></div>
+                <p>結局、いまはどのAIが一番すごいの？</p>
+              </div>
+            </div>
+            <div class="line right">
+              <div class="avatar"><img src="./kagami.png" alt="柊かがみ" onerror="this.remove();this.parentNode.innerHTML='<span class=fallback>か</span>'"></div>
+              <div class="bubble">
+                <div class="speaker"><b>柊かがみ</b><span class="role">解説役</span></div>
+                <p>その聞き方だと少しズレるのよ。<span class="term">Seedance 2.0</span>は実写の動きや布・髪の自然さに強いし、<span class="term">Veo 3.1</span>は音までまとめて作りやすい。<span class="term">Kling 3.0</span>は複数カットをまとめて作りやすくてコスパもいい。つまり“最強1本”より“用途別の最適解”なの。</p>
+                <span class="simple">やさしく言うと：包丁1本で全部やるより、魚用・肉用・野菜用を使い分ける感じ。</span>
+              </div>
+            </div>
+            <div class="line">
+              <div class="avatar"><img src="./konata.png" alt="泉こなた" onerror="this.remove();this.parentNode.innerHTML='<span class=fallback>こ</span>'"></div>
+              <div class="bubble">
+                <div class="speaker"><b>泉こなた</b><span class="role">言い換え役</span></div>
+                <p>“最強を探す旅”より“使い分けの地図を持つ”方が、クレジットもメンタルも守れるってわけだね。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid3">
+          <div class="card"><b>Seedance 2.0</b><p>布、髪、重力、カメラ、空気感などの<span class="term">物理表現</span>が自然。シネマ調、実写広告、映画風に向く。</p></div>
+          <div class="card"><b>Veo 3.1</b><p>映像と音を一括で作りやすい。セリフ、効果音、環境音までまとめたい時に強い。</p></div>
+          <div class="card"><b>Kling 3.0</b><p>マルチショットと低コストが魅力。複数カットの試作や、量産テスト向き。</p></div>
+        </div>
+      </section>
+
+      <section class="section" id="s2">
+        <h2>2. モデルは“用途”で選ぶ</h2>
+        <p class="sectionLead">画質差だけを見る時代は終わりつつある。差が出るのは、動き、物理表現、音、量産性、実務とのつなぎやすさ。</p>
+        <div class="grid2">
+          <div class="card">
+            <b>こんな人はSeedance向き</b>
+            <ul>
+              <li>実写CMや映画っぽい映像を作りたい</li>
+              <li>髪、服、重み、光の自然さを重視したい</li>
+              <li>短いけど濃い1本を作りたい</li>
+            </ul>
+          </div>
+          <div class="card">
+            <b>こんな人はVeo向き</b>
+            <ul>
+              <li>映像だけでなく音も一緒に考えたい</li>
+              <li>効果音、環境音、しゃべりもまとめて試したい</li>
+              <li>Google系の流れで使いたい</li>
+            </ul>
+          </div>
+          <div class="card">
+            <b>こんな人はKling向き</b>
+            <ul>
+              <li>複数カットの構成を一気に試したい</li>
+              <li>コストを抑えながら試作したい</li>
+              <li>ショート動画のバリエーションを増やしたい</li>
+            </ul>
+          </div>
+          <div class="card">
+            <b>判断のコツ</b>
+            <p>先に「作りたい動画の勝ち筋」を決める。<br>例：実写CM、アバター説明、縦型広告、商品紹介、映画風、SNS量産。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="s3">
+        <h2>3. HeyGenとAdobe Fireflyが意味すること</h2>
+        <p class="sectionLead">最新トレンドは“生成だけ”ではなく、“制作フローにどう組み込むか”。ここが実務でかなり大事。</p>
+        <div class="grid3">
+          <div class="card"><b>HeyGen</b><p>映画風に動くアバターを作りやすい。最大3体まで同じシーンに置けるため、対話動画やプレゼン動画にも使いやすい。</p></div>
+          <div class="card"><b>弱点</b><p>地域制限、安定性、対象国の制約などがある場合がある。万能ではなく、様子見しながら使う道具。</p></div>
+          <div class="card"><b>Adobe Firefly</b><p>外部AIモデルをAdobe環境で切り替えやすくなってきた。生成→ダウンロード→編集の手間を減らしやすい。</p></div>
+          <div class="card"><b>Premiere連携</b><p>編集ソフトへ持って行くまでの摩擦が減る。制作スピードは上がるが、クレジット管理はより重要になる。</p></div>
+          <div class="card"><b>データ送信</b><p>外部モデル統合では、プロンプトや素材が他社処理になる場合がある。社外秘や機密は特に注意。</p></div>
+          <div class="card"><b>実務の目線</b><p>“作れるか”だけでなく、“社内ルールに乗るか”“クライアント確認がいるか”も見る。</p></div>
+        </div>
+      </section>
+
+      <section class="section" id="s4">
+        <h2>4. AI動画生成でハマりやすい7つの罠</h2>
+        <p class="sectionLead">初心者が失敗する原因は、センス不足ではない。設計不足と確認不足がほとんど。</p>
+        <div class="panel">
+          <div class="label">SCENE 23 / 事故を防ぐ話</div>
+          <div class="dialogue">
+            <div class="line">
+              <div class="avatar"><img src="./miyuki.png" alt="高良みゆき" onerror="this.remove();this.parentNode.innerHTML='<span class=fallback>み</span>'"></div>
+              <div class="bubble">
+                <div class="speaker"><b>高良みゆき</b><span class="role">まとめ役</span></div>
+                <p>一番多いのは、プロンプトを盛りすぎてAIが混乱することです。顔、手、背景、カメラ、感情、光、全部を一度に詰め込むと壊れやすいです。</p>
+              </div>
+            </div>
+            <div class="line right">
+              <div class="avatar"><img src="./kagami.png" alt="柊かがみ" onerror="this.remove();this.parentNode.innerHTML='<span class=fallback>か</span>'"></div>
+              <div class="bubble">
+                <div class="speaker"><b>柊かがみ</b><span class="role">解説役</span></div>
+                <p>だから、動かす対象を絞るの。激しい動きなら1つ、中くらいなら2つ、小さい動きなら3つくらいまでが目安。あと、原型画像を作ってから動画にするのが本当に大事。</p>
+                <span class="simple">やさしく言うと：最初から全部入りラーメンにしない。まずは麺とスープを安定させる。</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid3">
+          <div class="card"><b>罠1：盛りすぎ</b><p>情報を詰め込みすぎると破綻しやすい。動きと対象を絞る。</p></div>
+          <div class="card"><b>罠2：雑すぎ</b><p>短すぎる指示だとAIが勝手に補完する。主体、場所、動き、カメラ、雰囲気は入れる。</p></div>
+          <div class="card"><b>罠3：原型なし</b><p>静止画を先に作らず動画へ行くと、顔、服、背景の一貫性が崩れやすい。</p></div>
+          <div class="card"><b>罠4：道具ミス</b><p>実務向け、アニメ向け、映画向け、アバター向けでツールは違う。</p></div>
+          <div class="card"><b>罠5：生成ガチャ</b><p>回し続けるとクレジットが消える。3回ルールで止める。</p></div>
+          <div class="card"><b>罠6・7：確認不足と権利軽視</b><p>数字、日本語、ロゴ、商用条件、既存キャラ、有名人、肖像権を軽く見ると危険。</p></div>
+        </div>
+      </section>
+
+      <section class="section" id="s5">
+        <h2>5. AIラベル・法律・やってはいけないこと</h2>
+        <p class="sectionLead">これからは“作れるか”だけでなく、“出していいか”が超重要。技術より先に、ここを知らないと危ない。</p>
+        <div class="grid2">
+          <div class="card">
+            <b>YouTubeのAIラベル</b>
+            <p>YouTube側がAI生成コンテンツを検知した場合、自動でラベルが付く流れが強まっている。AIラベル自体が即悪ではないが、隠す・誤魔化す・申告しない方が危ない。</p>
+          </div>
+          <div class="card">
+            <b>人間チェックが必須</b>
+            <p>人が編集した動画にAIラベルが付く可能性もあり得る。だからこそ、制作ログ、素材の出どころ、使ったツールを整理しておくと安心。</p>
+          </div>
+          <div class="card">
+            <b>実在人物の危険な加工</b>
+            <p>特に未成年や実在人物を使った不適切なAI加工は絶対に避ける。作っただけ、持っているだけでも問題になることがある。</p>
+          </div>
+          <div class="card">
+            <b>覚えておくべき原則</b>
+            <p>「AIで作ったから安全」は通用しない。著作権、肖像権、商用利用規約、プラットフォーム規約は必ず見る。</p>
+          </div>
+        </div>
+        <div class="warn">
+          <b>超重要：</b><br>
+          実在人物、とくに未成年、既存キャラ、有名人、他社ブランドのロゴや商品、無料素材の商用条件には要注意。
+          AI時代は“何を作れるか”より、“何を作ってはいけないか”を知っている人が強い。
+        </div>
+      </section>
+
+      <section class="section" id="s6">
+        <h2>6. 新しい時代に対応できる方法</h2>
+        <p class="sectionLead">AI動画制作は、技術だけ磨いても足りない。運用、確認、倫理までセットで回せる人が、これから信用される。</p>
+        <div class="grid2">
+          <div class="card">
+            <b>対応法1：用途から逆算する</b>
+            <p>“何の動画か”を先に決める。SNSショート、商品紹介、研修、CM、映画風で必要な道具は変わる。</p>
+          </div>
+          <div class="card">
+            <b>対応法2：静止画から始める</b>
+            <p>顔、服、背景、色味、距離感を静止画で固めてから動かす。これだけで事故率がかなり下がる。</p>
+          </div>
+          <div class="card">
+            <b>対応法3：短く具体的なプロンプト</b>
+            <p>誰が、どこで、何をして、カメラはどう動き、どんな雰囲気か。この順で十分強い。</p>
+          </div>
+          <div class="card">
+            <b>対応法4：3回で切る</b>
+            <p>1回目=理想、2回目=安全版、3回目=少し攻める。4回目以降は別アプローチに切り替える。</p>
+          </div>
+          <div class="card">
+            <b>対応法5：公開前の点検表</b>
+            <p>数字、日本語、名称、ロゴ、権利、AIラベル、音声、字幕、事実確認。これを毎回見る。</p>
+          </div>
+          <div class="card">
+            <b>対応法6：成功パターンを残す</b>
+            <p>良かったプロンプト、ダメだった設定、使ったモデル、所感をメモして、再現しやすい型にする。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="s7">
+        <h2>7. Day8前半の図解まとめ</h2>
+        <p class="sectionLead">画像クリックで拡大できる。モデル選び、事故防止、権利と運用まで、ざっくり見返せる形にしてある。</p>
+
+        <div class="diagram">
+          <img src="./day8_model_choice_map.png" alt="Day8前半 AI動画生成モデルの使い分け地図">
+          <div class="cap">Seedance、Veo、Kling、HeyGen、Adobe Fireflyの役割を用途別に整理。</div>
+        </div>
+
+        <div class="diagram" style="margin-top:16px;">
+          <img src="./day8_safe_workflow.png" alt="Day8前半 AI動画生成の安全ワークフロー">
+          <div class="cap">目的決め、原型画像、具体的プロンプト、3回ルール、人間確認、権利チェックの流れ。</div>
+        </div>
+
+        <div class="diagram" style="margin-top:16px;">
+          <img src="./day8_trap_counter_map.png" alt="Day8前半 AI動画生成でハマりやすい7つの罠">
+          <div class="cap">盛りすぎ、雑すぎ、原型なし、道具ミス、生成ガチャ、確認不足、権利軽視への対策。</div>
+        </div>
+
+        <div class="diagram" style="margin-top:16px;">
+          <img src="./day8_rule_ethics_map.png" alt="Day8前半 新しい時代に対応する3本柱">
+          <div class="cap">技術、運用、倫理・法律、公開ルール、信用の考え方を1枚に整理。</div>
+        </div>
+      </section>
+
+
+      <section class="hero section" id="backhero">
+        <span class="eyebrow">DAY8 BACK / PRACTICAL MODEL RANKING & PROMPT CONTROL</span>
+        <h1>AI動画生成は、<br>モデル選びとプロンプト設計で<br>クオリティもコストも大きく変わる。</h1>
+        <p class="lead">Day8後半では、実生成テストで見えてきたモデルの実力差と、動画生成の精度を上げるプロンプトの作り方を学ぶ。Seedance 2.0、Veo 3 Pro、Kling 3.0などの使い分けに加えて、世界観、表情、動き、カメラ、禁止事項、リファレンス、リップシンク、続きを生成する方法まで、初心者向けに噛み砕いて整理する。</p>
+        <div class="pillrow"><span class="pill">🏆 モデル実戦評価</span><span class="pill">✍️ プロンプト精度アップ</span><span class="pill">🎥 カメラ制御</span><span class="pill">🧭 リファレンス</span><span class="pill">🗣️ リップシンク</span><span class="pill">🔗 続き生成</span></div>
+      </section>
+
+      <section class="section" id="b1">
+        <h2>1. 実生成テストで見るモデルの現実的な選び方</h2>
+        <p class="sectionLead">酔っ払いのおじさん動画、Vlog風動画、商品レビュー動画のように、実写感、日本語音声、リップシンク、指示再現を比べると、モデルごとの得意・不得意がかなり見える。</p>
+        <div class="panel"><div class="label">SCENE 24 / ランキングの見方</div><div class="dialogue">
+          <div class="line"><div class="avatar"><img src="./tsukasa.png" alt="柊つかさ" onerror="this.remove();this.parentNode.innerHTML='<span class=fallback>つ</span>'"></div><div class="bubble"><div class="speaker"><b>柊つかさ</b><span class="role">素朴な疑問役</span></div><p>ランキングって、1位だけ使えばいいの？</p></div></div>
+          <div class="line right"><div class="avatar"><img src="./kagami.png" alt="柊かがみ" onerror="this.remove();this.parentNode.innerHTML='<span class=fallback>か</span>'"></div><div class="bubble"><div class="speaker"><b>柊かがみ</b><span class="role">解説役</span></div><p>本気の高品質ならSeedance 2.0が強い。でも、たくさん試すならVeo 3 Proのコスパが魅力。SNS量産ならKling 2.6や2.5も候補。つまり、目的と予算で変えるの。</p><span class="simple">やさしく言うと：高級レストランと日常の弁当屋を、同じ基準で比べない。</span></div></div>
+          <div class="line"><div class="avatar"><img src="./konata.png" alt="泉こなた" onerror="this.remove();this.parentNode.innerHTML='<span class=fallback>こ</span>'"></div><div class="bubble"><div class="speaker"><b>泉こなた</b><span class="role">言い換え役</span></div><p>Seedanceは本番用、Veo 3 Proはコスパ用、Kling系はSNS試作用って覚えると迷いにくいね。</p></div></div>
+        </div></div>
+        <div class="grid3">
+          <div class="card"><b>Seedance 2.0｜S評価</b><p>実写感、動き、質感、日本語セリフ、リップシンクが非常に強い。本気の高品質動画向き。</p></div>
+          <div class="card"><b>Veo 3 Pro｜A評価</b><p>最大16秒、日本語音声対応、コスパのバランスが良い。試作にも実務にも使いやすい。</p></div>
+          <div class="card"><b>Kling 3.0｜A評価</b><p>動画品質は高いが、日本語ミスや細かいAI感が出る場合がある。万能寄りの優等生。</p></div>
+          <div class="card"><b>Kling 2.6 / 2.5</b><p>SNS向けのコスパ枠。軽い投稿や量産には便利だが、本番品質では上位モデルに劣る。</p></div>
+          <div class="card"><b>Veo 3.1</b><p>日本語とリップシンクは良いが、商品一貫性、Vlog感、コストに注意。</p></div>
+          <div class="card"><b>低評価枠</b><p>Hailuo 2.3、PixVerse、Luma Ray 2などは、指示無視、破綻、コスト面で厳しい場面がある。</p></div>
+        </div>
+      </section>
+
+      <section class="section" id="b2">
+        <h2>2. 精度を上げるプロンプトは「細かく」ではなく「明確に」書く</h2>
+        <p class="sectionLead">細かく書けばいいわけではない。大事なのは、AIが迷うところを先回りして埋めること。世界観、表情、トーン、動き、カメラ、禁止事項を整理して書く。</p>
+        <div class="grid2">
+          <div class="card"><b>弱い例</b><p>「女性が商品を紹介する動画」<br>→ 場所、表情、カメラ、商品、雰囲気、音声、動きが不明。</p></div>
+          <div class="card"><b>強い例</b><p>「明るい朝のキッチン。30代女性が白いテーブルの前で商品を手に持ち、安心した表情でゆっくり説明する。カメラは固定、ズームなし。背景は動かさない。口元は日本語音声に合わせる。手を増やさない。」</p></div>
+        </div>
+        <div class="grid3">
+          <div class="card"><b>世界観</b><p>時代、場所、空気感、光、天候を書く。映画・MV・ファンタジーでは特に重要。</p></div>
+          <div class="card"><b>表情</b><p>不安、希望、緊張、疲れ、安心などを指定する。演出と顔のズレを減らす。</p></div>
+          <div class="card"><b>トーン</b><p>CM風、Vlog風、映画風、ドキュメンタリー風、SF風、アニメ風などを入れる。</p></div>
+        </div>
+      </section>
+
+      <section class="section" id="b3">
+        <h2>3. 動きとカメラは、欲張るほど壊れやすい</h2>
+        <p class="sectionLead">動画生成AIは、激しい動き、複数人、手、口、カメラ移動が重なると破綻しやすい。最初は小さく動かし、成功したら少しずつ増やす。</p>
+        <div class="grid3">
+          <div class="card"><b>動きは小さく</b><p>控えめ、ゆっくり、一定速度で、軽く振り返る、髪が少し揺れる、などから始める。</p></div>
+          <div class="card"><b>画角をロック</b><p>カメラ固定、ズームなし、パンなし、背景固定を入れると、勝手な移動を防ぎやすい。</p></div>
+          <div class="card"><b>人数を減らす</b><p>人物が多いほど破綻しやすい。不要なら1〜2人に抑える。</p></div>
+          <div class="card"><b>速度を指定</b><p>高速、ゆっくり、一定速度、急加速しない、などで躍動感と安定性を調整する。</p></div>
+          <div class="card"><b>物理法則</b><p>月面なら浮く、物は自然に落下する、服と髪は重力に従うなどを入れる。</p></div>
+          <div class="card"><b>POV</b><p>一人称視点、動物視点、ダイバー視点、パイロット視点などで臨場感を出す。</p></div>
+        </div>
+      </section>
+
+      <section class="section" id="b4">
+        <h2>4. リファレンス・リップシンク・開始終了画像を使う</h2>
+        <p class="sectionLead">キャラクター固定や商品レビューのように、一貫性が大事な動画では、テキストだけで頑張るより、画像や音声を使った方が安定する。</p>
+        <div class="grid3">
+          <div class="card"><b>リファレンス</b><p>参照画像を使うと、同じ人物、同じ服装、同じアクセサリーを保ちやすい。</p></div>
+          <div class="card"><b>開始画像と終了画像</b><p>朝から夜、室内から屋外など、変化のある動画は始点と終点を指定すると安定しやすい。</p></div>
+          <div class="card"><b>リップシンク</b><p>音声と口の動きを合わせる。MV、会話、レビュー、Vlog風動画では重要。</p></div>
+          <div class="card"><b>モーションコントロール</b><p>ダンスやアクションは、動きの参照を使うと再現しやすい。</p></div>
+          <div class="card"><b>背景の展開</b><p>トンネルに入る、景色が変わる、雨が降るなどを入れると単調さを避けられる。</p></div>
+          <div class="card"><b>動画の続きを作る</b><p>最後のフレームを使って続きを生成すると、短い動画を自然に長くしやすい。</p></div>
+        </div>
+      </section>
+
+      <section class="section" id="b5">
+        <h2>5. 生成後チェックで信用を守る</h2>
+        <p class="sectionLead">高性能モデルでも、同じプロンプトから完全に同じ動画は出ない。だから、成功プロンプトの丸コピーより、破綻しにくい構造を理解する方が重要。</p>
+        <div class="grid2">
+          <div class="card"><b>必ず見る場所</b><ul><li>顔、手、指、口、目線</li><li>日本語音声、字幕、看板、ロゴ</li><li>数字、年号、統計、名称</li><li>商品や人物の一貫性</li><li>商用利用、著作権、肖像権</li></ul></div>
+          <div class="card"><b>3回ルール</b><p>1回目は理想形、2回目は安全版、3回目は少し攻める。3回やってダメなら、モデルを変えるか、原型画像やプロンプトを作り直す。</p></div>
+        </div>
+        <div class="warn"><b>結論：</b><br>AI動画生成は、最初から明確に指示すると、修正回数とクレジット消費を減らせる。ただし最後に信用を守るのは人間。AIに作らせ、人間が確認し、必要なら編集で直す。</div>
+      </section>
+
+      <section class="section" id="b6">
+        <h2>6. Day8後半の図解まとめ</h2>
+        <p class="sectionLead">モデルランキング、精度を高めるプロンプト、動きとカメラ、リファレンスと長尺化を図解にした。画像クリックで拡大できる。</p>
+        <div class="diagram"><img src="./day8_back_model_ranking_map.png" alt="Day8後半 AI動画モデル実生成ランキング地図"><div class="cap">Seedance 2.0、Veo 3 Pro、Kling 3.0、Veo 3.1、Sora別枠などの実用的な見方。</div></div>
+        <div class="diagram" style="margin-top:16px;"><img src="./day8_back_prompt_precision_workflow.png" alt="Day8後半 精度を高める動画プロンプト手順"><div class="cap">世界観、主体、表情、動き、カメラ、禁止事項を明確にして生成精度を上げる。</div></div>
+        <div class="diagram" style="margin-top:16px;"><img src="./day8_back_motion_camera_map.png" alt="Day8後半 動き・カメラ・物理法則の指定マップ"><div class="cap">小さな動き、速度、カメラワーク、POV、物理法則、背景展開の使い方。</div></div>
+        <div class="diagram" style="margin-top:16px;"><img src="./day8_back_reference_lipsync_extend_flow.png" alt="Day8後半 リファレンス・リップシンク・続きを作る流れ"><div class="cap">原型画像、参照画像、開始終了画像、モーション制御、リップシンク、続き生成。</div></div>
+      </section>
+
+      <section class="glossary" id="glossary">
+        <h2>用語辞典</h2>
+
+
+        <details id="gl-reference-image">
+          <summary><span>リファレンス</span><i class="chev"></i></summary>
+          <div class="glossaryContent"><b>意味：</b>AIに見本として渡す参照画像や参照素材。<br><b>もっと簡単に：</b>「この顔・服・雰囲気を保って」と見せる見本。</div>
+        </details>
+        <details id="gl-lipsync">
+          <summary><span>リップシンク</span><i class="chev"></i></summary>
+          <div class="glossaryContent"><b>意味：</b>音声に合わせて口の動きを合わせること。<br><b>もっと簡単に：</b>しゃべっている声と口パクを合わせる機能。</div>
+        </details>
+        <details id="gl-pov">
+          <summary><span>POV</span><i class="chev"></i></summary>
+          <div class="glossaryContent"><b>意味：</b>Point of View。一人称視点。<br><b>もっと簡単に：</b>自分の目で見ているようなカメラ視点。</div>
+        </details>
+        <details id="gl-motion-control">
+          <summary><span>モーションコントロール</span><i class="chev"></i></summary>
+          <div class="glossaryContent"><b>意味：</b>参照動画や指示を使って、動き方を制御する方法。<br><b>もっと簡単に：</b>AIに「この動きをまねして」と教えること。</div>
+        </details>
+
+        <details id="gl-multimodal">
+          <summary><span>マルチモーダル</span><i class="chev"></i></summary>
+          <div class="glossaryContent"><b>意味：</b>文字、画像、音声、動画など、複数の種類の情報をまとめて扱う仕組み。<br><b>もっと簡単に：</b>文章だけじゃなく、絵も音も一緒にわかるAI。</div>
+        </details>
+
+        <details id="gl-api">
+          <summary><span>API</span><i class="chev"></i></summary>
+          <div class="glossaryContent"><b>意味：</b>外部サービス同士をつなぐための仕組み。<br><b>もっと簡単に：</b>ソフト同士の連絡口。</div>
+        </details>
+
+        <details id="gl-physical">
+          <summary><span>物理表現</span><i class="chev"></i></summary>
+          <div class="glossaryContent"><b>意味：</b>布、髪、重力、光、動き方などが自然に見える表現。<br><b>もっと簡単に：</b>“ちゃんと現実っぽく動いて見えるか”のこと。</div>
+        </details>
+
+        <details id="gl-ai-label">
+          <summary><span>AIラベル</span><i class="chev"></i></summary>
+          <div class="glossaryContent"><b>意味：</b>AIで作られた、またはAI加工が入ったコンテンツであることを示す表示。<br><b>もっと簡単に：</b>「この動画、AI使ってます」の名札。</div>
+        </details>
+
+        <details id="gl-credit">
+          <summary><span>クレジット</span><i class="chev"></i></summary>
+          <div class="glossaryContent"><b>意味：</b>AI生成に使うポイントや回数のこと。<br><b>もっと簡単に：</b>生成すると減る“体力ゲージ”。</div>
+        </details>
+
+        <details id="gl-avatar">
+          <summary><span>アバター</span><i class="chev"></i></summary>
+          <div class="glossaryContent"><b>意味：</b>自分やキャラクターの代わりに動画へ登場する分身。<br><b>もっと簡単に：</b>顔出しの代わりにしゃべってくれる代理人。</div>
+        </details>
+
+        <details id="gl-rights">
+          <summary><span>著作権・肖像権</span><i class="chev"></i></summary>
+          <div class="glossaryContent"><b>意味：</b>作品や人物の顔・姿を勝手に使われないための権利。<br><b>もっと簡単に：</b>他人の作品や顔を、許可なく使っちゃダメというルール。</div>
+        </details>
+      </section>
+
+    </div>
+  </main>
+
+  <aside class="cast">
+    <h3>登場人物</h3>
+    <div class="castCard">
+      <div class="avatar"><img src="./tsukasa.png" alt="柊つかさ" onerror="this.remove();this.parentNode.innerHTML='<span class=fallback>つ</span>'"></div>
+      <div class="castText"><b>柊つかさ</b><span>素朴な疑問役。初心者の「それ何？」担当。</span></div>
+    </div>
+    <div class="castCard">
+      <div class="avatar"><img src="./konata.png" alt="泉こなた" onerror="this.remove();this.parentNode.innerHTML='<span class=fallback>こ</span>'"></div>
+      <div class="castText"><b>泉こなた</b><span>言い換え役。空気を軽くする担当。</span></div>
+    </div>
+    <div class="castCard">
+      <div class="avatar"><img src="./kagami.png" alt="柊かがみ" onerror="this.remove();this.parentNode.innerHTML='<span class=fallback>か</span>'"></div>
+      <div class="castText"><b>柊かがみ</b><span>しっかり解説役。意味を整理する担当。</span></div>
+    </div>
+    <div class="castCard">
+      <div class="avatar"><img src="./miyuki.png" alt="高良みゆき" onerror="this.remove();this.parentNode.innerHTML='<span class=fallback>み</span>'"></div>
+      <div class="castText"><b>高良みゆき</b><span>まとめ役。難しい話をやわらかくする担当。</span></div>
+    </div>
+    <div class="note">画像を同じフォルダに入れなければ顔は出ず、名前だけで進む仕様。</div>
+  </aside>
+</div>
+
+<div class="zoomOverlay" id="zoomOverlay" aria-hidden="true">
+  <div class="zoomBox" role="dialog" aria-modal="true" aria-label="図解拡大表示">
+    <div class="zoomHead">
+      <b id="zoomTitle">図解拡大表示</b>
+      <button class="zoomClose" type="button" id="zoomClose">閉じる ✕</button>
+    </div>
+    <img id="zoomBigImg" src="" alt="拡大図解">
+  </div>
+</div>
+
+<script>
+(function(){
+  const overlay = document.getElementById('zoomOverlay');
+  const bigImg = document.getElementById('zoomBigImg');
+  const title = document.getElementById('zoomTitle');
+  const close = document.getElementById('zoomClose');
+
+  function openZoom(img){
+    bigImg.src = img.getAttribute('src');
+    bigImg.alt = img.getAttribute('alt') || '拡大図解';
+    title.textContent = img.getAttribute('alt') || '図解拡大表示';
+    overlay.classList.add('open');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeZoom(){
+    overlay.classList.remove('open');
+    overlay.setAttribute('aria-hidden', 'true');
+    bigImg.src = '';
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('click', function(e){
+    const img = e.target.closest('.diagram img');
+    if(img){
+      e.preventDefault();
+      openZoom(img);
+      return;
+    }
+    if(e.target === overlay){
+      closeZoom();
+    }
+  });
+
+  close.addEventListener('click', closeZoom);
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && overlay.classList.contains('open')){
+      closeZoom();
+    }
+  });
+})();
+</script>
+</body>
+</html>
